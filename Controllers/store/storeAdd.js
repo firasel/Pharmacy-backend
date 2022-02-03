@@ -1,5 +1,6 @@
 const SendResponse = require("../../Helpers/SendResponse");
 const Store = require("../../Models/store/storeModel");
+const Subscription = require("../../Models/store/subscriptionModel");
 const User = require("../../Models/user/userModel");
 
 const storeAdd = async (req, res, next) => {
@@ -29,6 +30,16 @@ const storeAdd = async (req, res, next) => {
             );
             // Check user object update success or not
             if (userUpdate) {
+              let expireDate = new Date();
+              //   Set the expiredate
+              expireDate.setMonth(expireDate.getMonth() + 3);
+
+              // subscription object creating
+              await Subscription.create({
+                _id: storeData._id,
+                expiredTime: expireDate,
+              });
+
               res.status(201).send(
                 SendResponse(true, "Store created successfully", {
                   _id: storeData._id,
