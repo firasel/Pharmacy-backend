@@ -13,7 +13,6 @@ const storeAdd = async (req, res, next) => {
           storeName: req.body.storeName,
           storeAddress: req.body.storeAddress,
           phone: req.body.phone,
-          storeName: req.body.storeName,
           active: req.body.active,
         },
         async (err, storeData) => {
@@ -25,16 +24,16 @@ const storeAdd = async (req, res, next) => {
             // Update user object with storeId
             const userUpdate = await User.findByIdAndUpdate(
               req.body?.userId,
-              { store_id: storeData._id },
+              { store_id: storeData._id, active: true },
               { new: true }
             );
             // Check user object update success or not
             if (userUpdate) {
               let expireDate = new Date();
-              //   Set the expiredate
+              // Set the expiredate
               expireDate.setMonth(expireDate.getMonth() + 3);
 
-              // subscription object creating
+              // Subscription object creating
               await Subscription.create({
                 _id: storeData._id,
                 expiredTime: expireDate,

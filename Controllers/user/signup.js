@@ -11,7 +11,6 @@ const signup = async (req, res, next) => {
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm,
         role: req.body.role,
-        active: req.body.active,
       },
       (err, userData) => {
         if (err) {
