@@ -43,6 +43,8 @@ const signin = async (req, res, next) => {
                     res.cookie("JWT_Token", token, {
                       httpOnly: true,
                       sameSite: true,
+                      domain: "localhost:3000",
+                      secure: true,
                       maxAge: 7 * 24 * 60 * 60 * 1000,
                     });
                     res
@@ -52,6 +54,11 @@ const signin = async (req, res, next) => {
                 }
               );
             } else {
+              res.cookie("JWT_Token", "", {
+                httpOnly: true,
+                sameSite: true,
+                maxAge: Date.now(),
+              });
               BadReqError(res);
             }
           }
