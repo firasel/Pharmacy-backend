@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+const expireDate = new Date();
+expireDate.setMonth(expireDate.getMonth() + 2);
+
 const signedTokensSchema = new mongoose.Schema(
   {
     _id: {
@@ -28,6 +31,10 @@ const signedTokensSchema = new mongoose.Schema(
     updatedTime: {
       type: Date,
       default: Date.now(),
+    },
+    expiresTime: {
+      type: Date,
+      default: expireDate,
     },
   },
   {

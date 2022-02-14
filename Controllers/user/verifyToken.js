@@ -1,66 +1,55 @@
-const { BadReqError, BackendError } = require("../../Helpers/AllCustomError");
+const {
+  BackendError,
+  UnauthorizedError,
+} = require("../../Helpers/AllCustomError");
 const jwt = require("jsonwebtoken");
 const User = require("../../Models/user/userModel");
 const SendResponse = require("../../Helpers/SendResponse");
 const SignedTokens = require("../../Models/user/signedTokens");
-const Store = require("../../Models/store/storeModel");
 
 const verifyToken = async (req, res, next) => {
   try {
-    const { JWT_Token = undefined } = req.cookies;
+    const { Auth_token = undefined } = req.cookies;
     // Check token is available or not
-    if (JWT_Token) {
+    if (Auth_token) {
       // Verify JWT token
-      jwt.verify(JWT_Token, process.env.JWT_SECRET, (err, { email, id }) => {
+      jwt.verify(Auth_token, process.env.JWT_SECRET, (err, { email, id }) => {
         if (err) {
-          BackendError(res);
+          UnauthorizedError(res);
         } else {
           // Find token data from database
           SignedTokens.findById(
             id,
-            { createdTime: 0, updatedTime: 0 },
+            { createdTime: 0, updatedTime: 0, store_id: 0, token: 0 },
             (err, tokenData) => {
-              if (tokenData?.active) {
-                // Check store is active or not
-                Store.findById(
-                  tokenData?.store_id,
-                  { active: 1 },
-                  (err, storeData) => {
-                    if (storeData?.active) {
-                      // Check user is active or not
-                      User.findById(
-                        tokenData?.user_id,
-                        { email: 1, active: 1 },
-                        (err, userData) => {
-                          // Check user active and database email with token email
-                          if (userData?.active && email === userData?.email) {
-                            res
-                              .status(200)
-                              .send(
-                                SendResponse(
-                                  true,
-                                  "User verification successful"
-                                )
-                              );
-                          } else {
-                            BackendError(res);
-                          }
-                        }
-                      );
+              if (tokenData?.active && tokenData?.expiresTime >= Date.now()) {
+                // Check user is active or not
+                User.findById(
+                  tokenData?.user_id,
+                  { email: 1, active: 1 },
+                  (err, userData) => {
+                    // Check user active and database email with token email
+                    if (userData?.active && email === userData?.email) {
+                      // Verify complete and user is valid
+                      res
+                        .status(200)
+                        .send(
+                          SendResponse(true, "User verification successful")
+                        );
                     } else {
-                      BackendError(res);
+                      UnauthorizedError(res);
                     }
                   }
                 );
               } else {
-                BackendError(res);
+                UnauthorizedError(res);
               }
             }
           );
         }
       });
     } else {
-      BackendError(res);
+      UnauthorizedError(res);
     }
   } catch (error) {
     next(error);

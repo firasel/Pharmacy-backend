@@ -16,12 +16,18 @@ const storeRoutes = require("./Routes/storeRoutes");
 
 // Application configuration setup
 app.use(cookieParser());
-app.use(helmet());
+// app.use(helmet());
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    credentials: true,
+  })
+);
 
 // Api request handling
 app.get("/", async (req, res) => {
+  console.log(req.cookies);
   res.send(SendResponse(true, "Api is working fine"));
 });
 
