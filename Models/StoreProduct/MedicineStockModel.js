@@ -42,6 +42,6 @@ const MedicineStockSchema = new mongoose.Schema(
   }
 );
 
-const MedicinesStock = mongoose.model("MedicinesStock", MedicineStockSchema);
+const MedicinesStock = mongoose.model("MedicineStock", MedicineStockSchema);
 
 module.exports = MedicinesStock;
