@@ -1,6 +1,6 @@
 const express = require("express");
-const medicineAdd = require("../Controllers/product/medicineAdd");
-const medicineAllDataAdd = require("../Controllers/product/medicineAllDataAdd");
+const medicineAdd = require("../Controllers/publicProduct/publicMedicineAdd");
+const medicineAllDataAdd = require("../Controllers/publicProduct/medicineAllDataAdd");
 const tokenVerify = require("../Middleware/tokenVerify");
 const router = express.Router();
 

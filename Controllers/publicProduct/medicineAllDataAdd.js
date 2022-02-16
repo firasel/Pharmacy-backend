@@ -1,6 +1,6 @@
 const { BackendError } = require("../../Helpers/AllCustomError");
 const SendResponse = require("../../Helpers/SendResponse");
-const Medicine = require("../../Models/product/medicineModel");
+const Medicine = require("../../Models/publicProduct/publicMedicineModel");
 
 const medicineAllDataAdd = async (req, res, next) => {
   try {

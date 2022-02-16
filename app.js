@@ -13,7 +13,7 @@ const SendResponse = require("./Helpers/SendResponse");
 // Import routers
 const userRoutes = require("./Routes/userRoutes");
 const storeRoutes = require("./Routes/storeRoutes");
-const medicineRoutes = require("./Routes/medicineRoutes");
+const publicMedicineRoutes = require("./Routes/publicMedicineRoutes");
 
 // Application configuration setup
 app.use(cookieParser());
@@ -39,7 +39,7 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/store", storeRoutes);
 
 // Store routes
-app.use("/api/v1/medicine", medicineRoutes);
+app.use("/api/v1/medicine", publicMedicineRoutes);
 
 // Error handling
 app.use(ErrorFunction);

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const medicineSchema = new mongoose.Schema(
+const publicMedicineSchema = new mongoose.Schema(
   {
     manufacturer: {
       type: String,
@@ -35,5 +35,5 @@ const medicineSchema = new mongoose.Schema(
   }
 );
 
-const Medicine = mongoose.model("Medicine", medicineSchema);
-module.exports = Medicine;
+const publicMedicine = mongoose.model("Medicine", publicMedicineSchema);
+module.exports = publicMedicine;
