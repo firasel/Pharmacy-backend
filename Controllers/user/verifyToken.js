@@ -3,11 +3,11 @@ const {
   UnauthorizedError,
 } = require("../../Helpers/AllCustomError");
 const jwt = require("jsonwebtoken");
-const User = require("../../Models/user/userModel");
+const User = require("../../Models/User/UserModel");
 const SendResponse = require("../../Helpers/SendResponse");
-const SignedTokens = require("../../Models/user/signedTokens");
+const SignedTokens = require("../../Models/User/SignedTokens");
 
-const verifyToken = async (req, res, next) => {
+const VerifyToken = async (req, res, next) => {
   try {
     const { Auth_token = undefined } = req.cookies;
     // Check token is available or not
@@ -56,4 +56,4 @@ const verifyToken = async (req, res, next) => {
   }
 };
 
-module.exports = verifyToken;
+module.exports = VerifyToken;

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userRoleSchema = new mongoose.Schema(
+const UserRoleSchema = new mongoose.Schema(
   {
     _id: {
       type: mongoose.ObjectId,
@@ -40,5 +40,6 @@ const userRoleSchema = new mongoose.Schema(
   }
 );
 
-const UserRole = mongoose.model("UserRole", userRoleSchema);
+const UserRole = mongoose.model("UserRole", UserRoleSchema);
+
 module.exports = UserRole;

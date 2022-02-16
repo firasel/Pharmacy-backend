@@ -1,8 +1,8 @@
 const SendResponse = require("../../Helpers/SendResponse");
-const User = require("../../Models/user/userModel");
-const userRoleModel = require("../../Models/user/userRoleModel");
+const User = require("../../Models/User/UserModel");
+const userRoleModel = require("../../Models/User/UserRoleModel");
 
-const signup = async (req, res, next) => {
+const Signup = async (req, res, next) => {
   try {
     User.create(
       {
@@ -67,4 +67,4 @@ const signup = async (req, res, next) => {
   }
 };
 
-module.exports = signup;
+module.exports = Signup;

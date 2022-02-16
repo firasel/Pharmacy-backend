@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const subscriptionSchema = new mongoose.Schema(
+const SubscriptionSchema = new mongoose.Schema(
   {
     _id: {
       type: mongoose.ObjectId,
@@ -9,7 +9,7 @@ const subscriptionSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: ["free", "basic", "pro"],
-      default:'free'
+      default: "free",
     },
     createdTime: {
       type: Date,
@@ -45,5 +45,6 @@ const subscriptionSchema = new mongoose.Schema(
   }
 );
 
-const Subscription = mongoose.model("Subscription", subscriptionSchema);
+const Subscription = mongoose.model("Subscription", SubscriptionSchema);
+
 module.exports = Subscription;

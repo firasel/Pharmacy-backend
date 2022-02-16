@@ -1,12 +1,12 @@
 const express = require("express");
-const medicineAdd = require("../Controllers/publicProduct/publicMedicineAdd");
-const medicineAllDataAdd = require("../Controllers/publicProduct/medicineAllDataAdd");
-const tokenVerify = require("../Middleware/tokenVerify");
+const MedicineAdd = require("../Controllers/PublicProduct/PublicMedicineAdd");
+const MedicineAllDataAdd = require("../Controllers/PublicProduct/MedicineAllDataAdd");
+const TokenVerify = require("../Middleware/TokenVerify");
 const router = express.Router();
 
-// Medicine add
-router.post("/add", tokenVerify, medicineAdd);
-// All medicine add
-router.post("/Add/all", medicineAllDataAdd);
+// Medicine add in public collection
+router.post("/add", TokenVerify, MedicineAdd);
+// All medicine add in public collection
+router.post("/Add/all", MedicineAllDataAdd);
 
 module.exports = router;

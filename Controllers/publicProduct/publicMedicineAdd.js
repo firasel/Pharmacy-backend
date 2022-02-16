@@ -1,8 +1,8 @@
 const { BackendError } = require("../../Helpers/AllCustomError");
 const SendResponse = require("../../Helpers/SendResponse");
-const Medicine = require("../../Models/publicProduct/publicMedicineModel");
+const Medicine = require("../../Models/PublicProduct/PublicMedicineModel");
 
-const publicMedicineAdd = async (req, res, next) => {
+const PublicMedicineAdd = async (req, res, next) => {
   try {
     const { manufacturer, name, genericName, strength, dosage, ref_id } =
       req.body;
@@ -32,4 +32,4 @@ const publicMedicineAdd = async (req, res, next) => {
   }
 };
 
-module.exports = publicMedicineAdd;
+module.exports = PublicMedicineAdd;

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const expireDate = new Date();
 expireDate.setMonth(expireDate.getMonth() + 2);
 
-const signedTokensSchema = new mongoose.Schema(
+const SignedTokensSchema = new mongoose.Schema(
   {
     _id: {
       type: mongoose.ObjectId,
@@ -42,5 +42,6 @@ const signedTokensSchema = new mongoose.Schema(
   }
 );
 
-const SignedTokens = mongoose.model("signedTokens", signedTokensSchema);
+const SignedTokens = mongoose.model("signedTokens", SignedTokensSchema);
+
 module.exports = SignedTokens;

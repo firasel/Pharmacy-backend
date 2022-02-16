@@ -2,17 +2,17 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const SendResponse = require("../../Helpers/SendResponse");
-const User = require("../../Models/user/userModel");
-const signToken = require("./signToken");
+const User = require("../../Models/User/UserModel");
+const signToken = require("./SignToken");
 const {
   BadReqError,
   BackendError,
   ForbiddenError,
   UnauthorizedError,
 } = require("../../Helpers/AllCustomError");
-const SignedTokens = require("../../Models/user/signedTokens");
+const SignedTokens = require("../../Models/User/SignedTokens");
 
-const signin = async (req, res, next) => {
+const Signin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     // Chech user inputs
@@ -84,4 +84,4 @@ const signin = async (req, res, next) => {
   }
 };
 
-module.exports = signin;
+module.exports = Signin;

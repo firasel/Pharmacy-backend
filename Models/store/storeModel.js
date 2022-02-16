@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const storeSchema = new mongoose.Schema(
+const StoreSchema = new mongoose.Schema(
   {
     storeName: {
       type: String,
@@ -16,7 +16,7 @@ const storeSchema = new mongoose.Schema(
     },
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
     createdTime: {
       type: Date,
@@ -32,5 +32,6 @@ const storeSchema = new mongoose.Schema(
   }
 );
 
-const Store = mongoose.model("Store", storeSchema);
+const Store = mongoose.model("Store", StoreSchema);
+
 module.exports = Store;

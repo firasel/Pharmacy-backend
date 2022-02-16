@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 
-const userSchema = new mongoose.Schema(
+const UserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -60,7 +60,7 @@ const userSchema = new mongoose.Schema(
 
 // encrypt the password using 'bcrypt'
 // Mongoose -> Document Middleware
-userSchema.pre("save", async function (next) {
+UserSchema.pre("save", async function (next) {
   // check the password if it is modified
   if (!this.isModified("password")) {
     return next();
@@ -74,5 +74,6 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", UserSchema);
+
 module.exports = User;

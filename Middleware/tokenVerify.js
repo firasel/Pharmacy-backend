@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { UnauthorizedError } = require("../Helpers/AllCustomError");
 
-const tokenVerify = (req, res, next) => {
+const TokenVerify = (req, res, next) => {
   try {
     const { Auth_token } = req.cookies;
     if (Auth_token) {
@@ -20,4 +20,4 @@ const tokenVerify = (req, res, next) => {
   }
 };
 
-module.exports = tokenVerify;
+module.exports = TokenVerify;

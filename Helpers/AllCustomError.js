@@ -25,9 +25,15 @@ const UnauthorizedError = async (res, message) => {
   await res.status(401).send(SendResponse(false, msg));
 };
 
+const NotFoundError = async (res, message) => {
+  let msg = message || "Data not found.";
+  await res.status(404).send(SendResponse(false, msg));
+};
+
 module.exports = {
   BadReqError,
   BackendError,
   ForbiddenError,
   UnauthorizedError,
+  NotFoundError,
 };

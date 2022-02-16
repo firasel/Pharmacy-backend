@@ -1,14 +1,14 @@
 const express = require("express");
-const signin = require("../Controllers/user/signin");
-const signup = require("../Controllers/user/signup");
-const verifyToken = require("../Controllers/user/verifyToken");
+const Signin = require("../Controllers/User/Signin");
+const Signup = require("../Controllers/User/Signup");
+const VerifyToken = require("../Controllers/User/VerifyToken");
 const router = express.Router();
 
 // Signup
-router.post("/signup", signup);
+router.post("/signup", Signup);
 // Signin
-router.post("/signin", signin);
+router.post("/signin", Signin);
 // Verify user signin
-router.get("/verify", verifyToken);
+router.get("/verify", VerifyToken);
 
 module.exports = router;

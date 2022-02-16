@@ -1,8 +1,8 @@
 const { BackendError } = require("../../Helpers/AllCustomError");
 const SendResponse = require("../../Helpers/SendResponse");
-const Medicine = require("../../Models/publicProduct/publicMedicineModel");
+const Medicine = require("../../Models/PublicProduct/PublicMedicineModel");
 
-const medicineAllDataAdd = async (req, res, next) => {
+const MedicineAllDataAdd = async (req, res, next) => {
   try {
     const allMedicineData = req.body;
     await allMedicineData.forEach((data) => {
@@ -24,4 +24,4 @@ const medicineAllDataAdd = async (req, res, next) => {
   }
 };
 
-module.exports = medicineAllDataAdd;
+module.exports = MedicineAllDataAdd;

@@ -1,9 +1,9 @@
 const SendResponse = require("../../Helpers/SendResponse");
-const Store = require("../../Models/store/storeModel");
-const Subscription = require("../../Models/store/subscriptionModel");
-const User = require("../../Models/user/userModel");
+const Store = require("../../Models/Store/StoreModel");
+const Subscription = require("../../Models/Store/SubscriptionModel");
+const User = require("../../Models/User/UserModel");
 
-const storeAdd = async (req, res, next) => {
+const StoreAdd = async (req, res, next) => {
   try {
     // Check userId is provide or not
     if (req.body?.userId) {
@@ -66,4 +66,4 @@ const storeAdd = async (req, res, next) => {
   }
 };
 
-module.exports = storeAdd;
+module.exports = StoreAdd;

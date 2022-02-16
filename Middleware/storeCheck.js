@@ -1,7 +1,7 @@
 const { Error } = require("mongoose");
-const User = require("../Models/user/userModel");
+const User = require("../Models/User/UserModel");
 
-const storeCheck = async (req, res, next) => {
+const StoreCheck = async (req, res, next) => {
   try {
     if (req.body?.userId) {
       // Get the store id from user objects
@@ -20,4 +20,4 @@ const storeCheck = async (req, res, next) => {
   }
 };
 
-module.exports = storeCheck;
+module.exports = StoreCheck;
