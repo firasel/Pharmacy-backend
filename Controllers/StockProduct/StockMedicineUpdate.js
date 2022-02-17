@@ -4,11 +4,11 @@ const MedicinesStock = require("../../Models/StoreProduct/MedicineStockModel");
 
 const StockMedicineUpdate = (req, res, next) => {
   try {
-    const { _id, stock } = req.body;
+    const { _id, stock, store_id } = req.body;
 
     // Update stock
-    MedicinesStock.findByIdAndUpdate(
-      _id,
+    MedicinesStock.findOneAndUpdate(
+      { _id, store_id },
       { $inc: { stock } },
       { new: true },
       (err, data) => {

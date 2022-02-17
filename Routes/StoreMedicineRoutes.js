@@ -1,5 +1,6 @@
 const express = require("express");
 const MedicineAdd = require("../Controllers/storeProduct/MedicineAdd");
+const MedicineGet = require("../Controllers/StoreProduct/MedicineGet");
 const MedicineUpdate = require("../Controllers/StoreProduct/MedicineUpdate");
 const TokenVerify = require("../Middleware/TokenVerify");
 const router = express.Router();
@@ -8,6 +9,9 @@ const router = express.Router();
 router.post("/add", TokenVerify, MedicineAdd);
 
 // Medicine update
-router.post("/update", TokenVerify, MedicineUpdate);
+router.put("/update", TokenVerify, MedicineUpdate);
+
+// Medicine get
+router.get("/get", TokenVerify, MedicineGet);
 
 module.exports = router;

@@ -1,21 +1,20 @@
-const { ObjectId } = require("mongodb");
 const { BadReqError } = require("../../Helpers/AllCustomError");
 const SendResponse = require("../../Helpers/SendResponse");
-const MedicinesStock = require("../../Models/StoreProduct/MedicineStockModel");
+const StoreMedicines = require("../../Models/storeProduct/medicineModel");
 
-const StockMedicineGet = async (req, res, next) => {
+const MedicineGet = async (req, res, next) => {
   try {
-    let { page = 1, limit = 20 } = req.query;
+    const { page = 1, limit = 20 } = req.query;
     const { store_id } = req.body;
 
     // Check user provided data
     if (limit <= 100 && page > 0) {
       // Calculate for pagination
-      let modifyLimit = parseInt(limit);
-      let modifyPage = parseInt(page) - 1;
+      const modifyLimit = parseInt(limit);
+      const modifyPage = parseInt(page) - 1;
 
-      // Get the medicine stocks with specific store and pagination
-      let medicineData = await MedicinesStock.find({ store_id })
+      // Get the medicine stocks with pagination
+      const medicineData = await StoreMedicines.find({ store_id })
         .sort({ _id: -1 })
         .skip(modifyPage * modifyLimit)
         .limit(modifyLimit);
@@ -37,4 +36,4 @@ const StockMedicineGet = async (req, res, next) => {
   }
 };
 
-module.exports = StockMedicineGet;
+module.exports = MedicineGet;
