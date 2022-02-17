@@ -36,7 +36,12 @@ const Signin = async (req, res, next) => {
                 // Generate Id
                 const id = new mongoose.Types.ObjectId();
                 // Generate the JWT token
-                const token = await signToken({ email, id });
+                const token = await signToken({
+                  email,
+                  id,
+                  store_id: userData?.store_id,
+                  user_id: userData?._id,
+                });
                 // Store this token in database
                 SignedTokens.create(
                   {

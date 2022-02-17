@@ -5,8 +5,11 @@ const TokenVerify = (req, res, next) => {
   try {
     const { Auth_token } = req.cookies;
     if (Auth_token) {
-      jwt.verify(Auth_token, process.env.JWT_SECRET, (error, { email, id }) => {
-        if (!error && email) {
+      jwt.verify(Auth_token, process.env.JWT_SECRET, (error, tokenData) => {
+        if (!error) {
+          const { store_id, user_id } = tokenData;
+          req.body.user_id = user_id;
+          req.body.store_id = store_id;
           next();
         } else {
           UnauthorizedError(res);

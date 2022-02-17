@@ -4,8 +4,16 @@ const Medicine = require("../../Models/PublicProduct/PublicMedicineModel");
 
 const PublicMedicineAdd = async (req, res, next) => {
   try {
-    const { manufacturer, name, genericName, strength, dosage, ref_id } =
-      req.body;
+    // Object destructuring
+    const {
+      manufacturer,
+      name,
+      genericName,
+      strength,
+      dosage,
+      store_id: ref_id,
+    } = req.body;
+
     Medicine.create(
       {
         manufacturer,
