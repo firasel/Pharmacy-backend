@@ -1,0 +1,38 @@
+const { BadReqError } = require("../../Helpers/AllCustomError");
+const SendResponse = require("../../Helpers/SendResponse");
+const PublicMedicine = require("../../Models/PublicProduct/PublicMedicineModel");
+
+const PublicMedicineGet = async (req, res, next) => {
+  try {
+    let { page = 1, limit = 20 } = req.query;
+
+    // Check user provided data
+    if (limit <= 100 && page > 0) {
+      // Calculate for pagination
+      let modifyLimit = parseInt(limit);
+      let modifyPage = parseInt(page) - 1;
+
+      // Get the medicine stocks with specific store and pagination
+      let medicineData = await PublicMedicine.find({})
+        .sort({ _id: -1 })
+        .skip(modifyPage * modifyLimit)
+        .limit(modifyLimit);
+
+      if (medicineData?.length > 0) {
+        res
+          .status(200)
+          .send(
+            SendResponse(true, "Medicine data get successfully.", medicineData)
+          );
+      } else {
+        BadReqError(res, "Data not found.");
+      }
+    } else {
+      BadReqError(res);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = PublicMedicineGet;
