@@ -1,5 +1,6 @@
 const ClearCookies = async (res) => {
-  res.clearCookie("Auth_token", "/");
+  await res.clearCookie("Auth_token", "/");
+  return true;
 };
 
 module.exports = ClearCookies;

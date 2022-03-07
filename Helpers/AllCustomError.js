@@ -15,13 +15,13 @@ const BackendError = async (res, message) => {
 
 const ForbiddenError = async (res, message) => {
   let msg = message || "You do not have permission.";
-  ClearCookies(res);
+  await ClearCookies(res);
   await res.status(403).send(SendResponse(false, msg));
 };
 
 const UnauthorizedError = async (res, message) => {
   let msg = message || "Unauthorized access denied.";
-  ClearCookies(res);
+  await ClearCookies(res);
   await res.status(401).send(SendResponse(false, msg));
 };
 
