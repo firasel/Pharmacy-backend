@@ -11,7 +11,7 @@ const MedicineAdd = (req, res, next) => {
     Store.exists({ _id: medicineObj?.store_id }, (err, result) => {
       if (result) {
         // Add medicine in database
-        StoreMedicines.create(medicineObj, (err, medicineData) => {
+        StoreMedicines.insertMany(medicineObj, (err, medicineData) => {
           if (!err && medicineData) {
             res
               .status(201)
