@@ -30,10 +30,12 @@ const MedicineSchema = new mongoose.Schema(
     qtyOfPacket: {
       type: Number,
       required: true,
+      min: 1,
     },
     qtyOfMedicine: {
       type: Number,
       required: true,
+      min: 1,
     },
     medicineShelf: {
       type: String,
