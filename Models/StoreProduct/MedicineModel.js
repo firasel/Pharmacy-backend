@@ -7,6 +7,10 @@ const MedicineSchema = new mongoose.Schema(
       required: true,
       ref: "Stores",
     },
+    ref_id: {
+      type: mongoose.ObjectId,
+      ref: "medicines",
+    },
     manufacturer: {
       type: String,
       required: true,
