@@ -1,4 +1,5 @@
 const express = require("express");
+const StockDetailsUpdate = require("../Controllers/StockProduct/StockDetailsUpdate");
 const StockMedicineAdd = require("../Controllers/StockProduct/StockMedicineAdd");
 const StockMedicineCount = require("../Controllers/StockProduct/StockMedicineCount");
 const StockMedicineGet = require("../Controllers/StockProduct/StockMedicineGet");
@@ -11,7 +12,10 @@ const router = express.Router();
 router.post("/add", TokenVerify, StockMedicineAdd);
 
 // Medicine stock(only) update
-router.put("/update", TokenVerify, StockMedicineUpdate);
+router.put("/update/stock", TokenVerify, StockMedicineUpdate);
+
+// Medicine stock details update
+router.put("/update/details", TokenVerify, StockDetailsUpdate);
 
 // Medicine stock get
 router.get("/get", TokenVerify, StockMedicineGet);

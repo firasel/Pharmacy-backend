@@ -1,4 +1,3 @@
-const { ObjectId } = require("mongodb");
 const { BadReqError } = require("../../Helpers/AllCustomError");
 const SendResponse = require("../../Helpers/SendResponse");
 const MedicinesStock = require("../../Models/StoreProduct/MedicineStockModel");
@@ -15,16 +14,26 @@ const StockMedicineGet = async (req, res, next) => {
       let modifyPage = parseInt(page) - 1;
 
       // Get the medicine stocks with specific store and pagination
-      let medicineData = await MedicinesStock.find({ store_id })
+      let stockData = await MedicinesStock.find({ store_id })
         .sort({ _id: -1 })
         .skip(modifyPage * modifyLimit)
-        .limit(modifyLimit);
+        .limit(modifyLimit)
+        .populate({ path: "medicine_id", select: "name strength qtyOfPacket qtyOfMedicine" });
 
-      if (medicineData?.length > 0) {
+      // Filter if medicine details not found then remove it.
+      let stockMedicineData = await stockData.filter(
+        (data) => data?.medicine_id !== null
+      );
+
+      if (stockMedicineData?.length > 0) {
         res
           .status(200)
           .send(
-            SendResponse(true, "Medicine data get successfully.", medicineData)
+            SendResponse(
+              true,
+              "Medicine data get successfully.",
+              stockMedicineData
+            )
           );
       } else {
         BadReqError(res, "Data not found.");
