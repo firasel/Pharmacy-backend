@@ -1,13 +1,13 @@
 const { BackendError } = require("../../Helpers/AllCustomError");
 const SendResponse = require("../../Helpers/SendResponse");
 const StoreCustomer = require("../../Models/storeCustomer/customerModel");
-const validator = require("validator");
+const { default: mongoose } = require("mongoose");
 
 const CustomerGet = (req, res, next) => {
   try {
     const { store_id } = req.body;
 
-    if (validator.isMongoId(store_id))
+    if (mongoose.isObjectIdOrHexString(store_id))
       // Add customer in database
       StoreCustomer.find(
         {

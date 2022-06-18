@@ -10,7 +10,7 @@ const MedicineDelete = async (req, res, next) => {
 
     // Check user provided data
     if (mongoose.isObjectIdOrHexString(id)) {
-      // Get the medicine stocks with pagination
+      // Delete the medicine
       const medicineDelete = await StoreMedicines.deleteOne({
         _id: id,
         store_id,

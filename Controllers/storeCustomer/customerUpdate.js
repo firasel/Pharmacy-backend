@@ -3,23 +3,28 @@ const SendResponse = require("../../Helpers/SendResponse");
 const Store = require("../../Models/Store/StoreModel");
 const StoreCustomer = require("../../Models/storeCustomer/customerModel");
 
-const CustomerAdd =async (req, res, next) => {
+const CustomerUpdate = async (req, res, next) => {
   try {
     // Object destructuring
-    const { store_id, name, phone, address, note } = req.body;
+    const { _id, store_id, name, phone, address, note } = req.body;
 
     // Check store is available in database
     Store.exists({ _id: store_id }, (err, result) => {
       if (result) {
         // Add customer in database
-        StoreCustomer.create(
+        StoreCustomer.findOneAndUpdate(
           {
+            _id,
             store_id,
+          },
+          {
             name,
             phone,
             address,
             note,
+            updatedTime: Date.now(),
           },
+          { new: true },
           (err, customerData) => {
             if (!err && customerData) {
               res
@@ -27,7 +32,7 @@ const CustomerAdd =async (req, res, next) => {
                 .send(
                   SendResponse(
                     true,
-                    "Customer added successfully.",
+                    "Customer details updated successfully.",
                     customerData
                   )
                 );
@@ -45,4 +50,4 @@ const CustomerAdd =async (req, res, next) => {
   }
 };
 
-module.exports = CustomerAdd;
+module.exports = CustomerUpdate;
