@@ -1,6 +1,6 @@
 const { BadReqError } = require("../../Helpers/AllCustomError");
 const SendResponse = require("../../Helpers/SendResponse");
-const MedicinesStock = require("../../Models/StoreProduct/MedicineStockModel");
+const MedicinesStock = require("../../Models/storeProduct/medicineStockModel");
 
 const StockMedicineGet = async (req, res, next) => {
   try {

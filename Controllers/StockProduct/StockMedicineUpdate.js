@@ -1,6 +1,6 @@
 const { BackendError } = require("../../Helpers/AllCustomError");
 const SendResponse = require("../../Helpers/SendResponse");
-const MedicinesStock = require("../../Models/StoreProduct/MedicineStockModel");
+const MedicinesStock = require("../../Models/storeProduct/medicineStockModel");
 
 const StockMedicineUpdate = (req, res, next) => {
   try {

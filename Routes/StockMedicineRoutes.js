@@ -1,11 +1,10 @@
 const express = require("express");
-const StockDetailsUpdate = require("../Controllers/StockProduct/StockDetailsUpdate");
-const StockMedicineAdd = require("../Controllers/StockProduct/StockMedicineAdd");
-const StockMedicineCount = require("../Controllers/StockProduct/StockMedicineCount");
-const StockMedicineGet = require("../Controllers/StockProduct/StockMedicineGet");
-const StockMedicineUpdate = require("../Controllers/StockProduct/StockMedicineUpdate");
+const StockDetailsUpdate = require("../Controllers/stockProduct/stockDetailsUpdate");
+const StockMedicineAdd = require("../Controllers/stockProduct/stockMedicineAdd");
+const StockMedicineCount = require("../Controllers/stockProduct/stockMedicineCount");
+const StockMedicineGet = require("../Controllers/stockProduct/stockMedicineGet");
+const StockMedicineUpdate = require("../Controllers/stockProduct/stockMedicineUpdate");
 const TokenVerify = require("../Middleware/TokenVerify");
-const MedicinesStock = require("../Models/StoreProduct/MedicineStockModel");
 const router = express.Router();
 
 // Medicine stock add

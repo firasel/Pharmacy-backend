@@ -2,7 +2,7 @@ const { BackendError, NotFoundError } = require("../../Helpers/AllCustomError");
 const SendResponse = require("../../Helpers/SendResponse");
 const Store = require("../../Models/Store/StoreModel");
 const StoreMedicines = require("../../Models/storeProduct/medicineModel");
-const MedicinesStock = require("../../Models/StoreProduct/MedicineStockModel");
+const MedicinesStock = require("../../Models/storeProduct/medicineStockModel");
 
 const StockMedicineAdd = (req, res, next) => {
   try {

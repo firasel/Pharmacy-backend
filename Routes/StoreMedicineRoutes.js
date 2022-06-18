@@ -1,9 +1,9 @@
 const express = require("express");
-const MedicineAdd = require("../Controllers/storeProduct/MedicineAdd");
-const MedicineAllAdd = require("../Controllers/StoreProduct/MedicineAllAdd");
-const MedicineDelete = require("../Controllers/storeProduct/MedicineDelete");
-const MedicineGet = require("../Controllers/StoreProduct/MedicineGet");
-const MedicineUpdate = require("../Controllers/StoreProduct/MedicineUpdate");
+const MedicineAdd = require("../Controllers/storeProduct/medicineAdd");
+const MedicineAllAdd = require("../Controllers/storeProduct/medicineAllAdd");
+const MedicineDelete = require("../Controllers/storeProduct/medicineDelete");
+const MedicineGet = require("../Controllers/storeProduct/medicineGet");
+const MedicineUpdate = require("../Controllers/storeProduct/medicineUpdate");
 const TokenVerify = require("../Middleware/TokenVerify");
 const router = express.Router();
 

@@ -11,11 +11,12 @@ const ErrorFunction = require("./Helpers/ErrorFunction");
 const SendResponse = require("./Helpers/SendResponse");
 
 // Import routers
-const UserRoutes = require("./Routes/UserRoutes");
-const StoreRoutes = require("./Routes/StoreRoutes");
-const PublicMedicineRoutes = require("./Routes/PublicMedicineRoutes");
-const StoreMedicineRoutes = require("./Routes/StoreMedicineRoutes");
-const StockMedicineRoutes = require("./Routes/StockMedicineRoutes");
+const UserRoutes = require("./Routes/userRoutes");
+const StoreRoutes = require("./Routes/storeRoutes");
+const PublicMedicineRoutes = require("./Routes/publicMedicineRoutes");
+const StoreMedicineRoutes = require("./Routes/storeMedicineRoutes");
+const StockMedicineRoutes = require("./Routes/stockMedicineRoutes");
+const StoreCustomerRoutes = require("./Routes/storeCustomerRoutes");
 
 // Application configuration setup
 app.use(cookieParser());
@@ -48,6 +49,9 @@ app.use("/api/v1/store/medicine", StoreMedicineRoutes);
 
 // Store product routes
 app.use("/api/v1/store/medicine/stock", StockMedicineRoutes);
+
+// Store product routes
+app.use("/api/v1/store/customer", StoreCustomerRoutes);
 
 // Error handling
 app.use(ErrorFunction);
