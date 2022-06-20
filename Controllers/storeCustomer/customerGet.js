@@ -1,30 +1,36 @@
-const { BackendError } = require("../../Helpers/AllCustomError");
+const { NotFoundError, BadReqError } = require("../../Helpers/AllCustomError");
 const SendResponse = require("../../Helpers/SendResponse");
 const StoreCustomer = require("../../Models/storeCustomer/customerModel");
-const { default: mongoose } = require("mongoose");
 
-const CustomerGet = (req, res, next) => {
+const CustomerGet = async (req, res, next) => {
   try {
+    const { page = 1, limit = 20 } = req.query;
     const { store_id } = req.body;
 
-    if (mongoose.isObjectIdOrHexString(store_id))
-      // Add customer in database
-      StoreCustomer.find(
-        {
-          store_id,
-        },
-        (err, customerData) => {
-          if (!err && customerData) {
-            res
-              .status(201)
-              .send(
-                SendResponse(true, "Customer get successfully.", customerData)
-              );
-          } else {
-            BackendError(res);
-          }
-        }
-      );
+    // Check user provided data
+    if (limit <= 100 && page > 0) {
+      // Calculate for pagination
+      const modifyLimit = parseInt(limit);
+      const modifyPage = parseInt(page) - 1;
+
+      // Get the medicine stocks with pagination
+      const customerData = await StoreCustomer.find({ store_id })
+        .sort({ _id: -1 })
+        .skip(modifyPage * modifyLimit)
+        .limit(modifyLimit);
+
+      if (customerData?.length > 0) {
+        res
+          .status(200)
+          .send(
+            SendResponse(true, "Customer data get successfully.", customerData)
+          );
+      } else {
+        NotFoundError(res, "Data not found.");
+      }
+    } else {
+      BadReqError(res);
+    }
   } catch (error) {
     next(error);
   }
