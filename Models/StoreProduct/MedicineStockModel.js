@@ -23,10 +23,12 @@ const MedicineStockSchema = new mongoose.Schema(
     buyingPrice: {
       type: Number,
       required: true,
+      min: 0,
     },
     sellingPrice: {
       type: Number,
       required: true,
+      min: 0,
     },
     createdTime: {
       type: Date,

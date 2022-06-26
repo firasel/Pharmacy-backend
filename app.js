@@ -17,6 +17,7 @@ const PublicMedicineRoutes = require("./Routes/publicMedicineRoutes");
 const StoreMedicineRoutes = require("./Routes/storeMedicineRoutes");
 const StockMedicineRoutes = require("./Routes/stockMedicineRoutes");
 const StoreCustomerRoutes = require("./Routes/storeCustomerRoutes");
+const ProductSellRoutes = require("./Routes/productSellRoutes");
 
 // Application configuration setup
 app.use(cookieParser());
@@ -52,6 +53,9 @@ app.use("/api/v1/store/medicine/stock", StockMedicineRoutes);
 
 // Store product routes
 app.use("/api/v1/store/customer", StoreCustomerRoutes);
+
+// Store product sell routes
+app.use("/api/v1/store/sell", ProductSellRoutes);
 
 // Error handling
 app.use(ErrorFunction);
