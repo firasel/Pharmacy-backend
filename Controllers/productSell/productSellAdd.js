@@ -70,34 +70,39 @@ const productSellAdd = async (req, res, next) => {
                 store_id,
                 products
               );
-
-              const productSellData = await ProductSell.create(
-                [
-                  {
-                    customer_id,
-                    store_id,
-                    products: modifiedProducts,
-                    totalItem: modifiedProducts?.length,
-                    vat,
-                    discount,
-                    totalPrice,
-                  },
-                ],
-                { session }
-              );
-              if (productSellData[0]) {
-                await decreaseStock(productSellData[0]);
-                await session.commitTransaction();
-                session.endSession();
-                res
-                  .status(201)
-                  .send(
-                    SendResponse(
-                      true,
-                      "Product sell successful.",
-                      productSellData
-                    )
-                  );
+              if (totalPrice - vat - discount >= 0) {
+                const productSellData = await ProductSell.create(
+                  [
+                    {
+                      customer_id,
+                      store_id,
+                      products: modifiedProducts,
+                      totalItem: modifiedProducts?.length,
+                      vat,
+                      discount,
+                      totalPrice: totalPrice - discount - vat,
+                    },
+                  ],
+                  { session }
+                );
+                if (productSellData[0]) {
+                  await decreaseStock(productSellData[0]);
+                  await session.commitTransaction();
+                  session.endSession();
+                  res
+                    .status(201)
+                    .send(
+                      SendResponse(
+                        true,
+                        "Product sell successful.",
+                        productSellData
+                      )
+                    );
+                } else {
+                  await session.abortTransaction();
+                  session.endSession();
+                  BackendError(res);
+                }
               } else {
                 await session.abortTransaction();
                 session.endSession();
@@ -109,7 +114,7 @@ const productSellAdd = async (req, res, next) => {
               next(error);
             }
           } else {
-            NotFoundError(res, "Customer not found");
+            NotFoundError(res, "Sell history not found");
           }
         });
       } else {
