@@ -5,7 +5,7 @@ const productSellSchema = new mongoose.Schema(
     customer_id: {
       type: mongoose.ObjectId,
       required: true,
-      ref: "StoreCustomer",
+      ref: "StoreCustomers",
     },
     store_id: {
       type: mongoose.ObjectId,

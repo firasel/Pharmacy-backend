@@ -4,7 +4,6 @@ const SendResponse = require("../../Helpers/SendResponse");
 const ProductSell = require("../../Models/productSell/productSellModel");
 const Store = require("../../Models/Store/StoreModel");
 const StoreCustomer = require("../../Models/storeCustomer/customerModel");
-const StoreMedicines = require("../../Models/storeProduct/medicineModel");
 const MedicinesStock = require("../../Models/storeProduct/medicineStockModel");
 
 const checkAndModifyObj = async (store_id, products) => {
