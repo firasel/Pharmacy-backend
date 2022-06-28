@@ -6,25 +6,21 @@ const Store = require("../../Models/Store/StoreModel");
 const productSellUpdate = async (req, res, next) => {
   try {
     // Object destructuring
-    const { store_id, vat, discount, totalPrice, _id } = req.body;
+    const { store_id, vat, discount, _id } = req.body;
 
     // Check store is available in database
     Store.exists({ _id: store_id }, async (err) => {
       if (!err) {
         // Check sell history is available in database
         ProductSell.findById({ _id }, async (err2, result) => {
-          if (
-            !err2 &&
-            result.totalPrice === totalPrice &&
-            totalPrice - vat - discount >= 0
-          ) {
+          if (!err2 && result.totalPrice - vat - discount >= 0) {
             // Update sell history in database
             const sellUpdateData = await ProductSell.findByIdAndUpdate(
               { _id },
               {
                 vat,
                 discount,
-                totalPrice: totalPrice - vat - discount,
+                totalPrice: result.totalPrice - vat - discount,
                 updatedTime: Date.now(),
               },
               { new: true }
