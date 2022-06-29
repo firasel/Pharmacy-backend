@@ -38,13 +38,17 @@ const checkAndModifyObj = async (store_id, products) => {
   }
 };
 
-const decreaseStock = async (sellData) => {
+const decreaseStock = async (sellData, session) => {
   try {
     for (const { stock_id, quantity } of sellData?.products) {
-      await MedicinesStock.findByIdAndUpdate(
+      let result = await MedicinesStock.findByIdAndUpdate(
         { _id: stock_id },
-        { $inc: { stock: -quantity } }
+        { $inc: { stock: -quantity } },
+        { session }
       );
+      if (result?.modifiedCount == 0) {
+        throw Error("Stock update failed");
+      }
     }
   } catch (error) {
     throw error;
@@ -86,7 +90,7 @@ const productSellAdd = async (req, res, next) => {
                   { session }
                 );
                 if (productSellData[0]) {
-                  await decreaseStock(productSellData[0]);
+                  await decreaseStock(productSellData[0], session);
                   await session.commitTransaction();
                   session.endSession();
                   res

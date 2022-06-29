@@ -28,11 +28,9 @@ const productSellGet = async (req, res, next) => {
         BadReqError(res, "Data not found.");
       }
     } else {
-        console.log("Error found 0");
       BadReqError(res);
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
