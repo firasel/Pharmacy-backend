@@ -18,7 +18,10 @@ const StockMedicineGet = async (req, res, next) => {
         .sort({ _id: -1 })
         .skip(modifyPage * modifyLimit)
         .limit(modifyLimit)
-        .populate({ path: "medicine_id", select: "name strength qtyOfPacket qtyOfMedicine" });
+        .populate({
+          path: "medicine_id",
+          select: "name dosage strength medicineShelf qtyOfPacket qtyOfMedicine",
+        });
 
       // Filter if medicine details not found then remove it.
       let stockMedicineData = await stockData.filter(
